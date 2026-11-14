@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="围绕职业探索 Agent 和 Java 社区论坛的面试学习、自测与复习。">
+  <title>实习面试复习 | 陈煜</title>
+  <link rel="stylesheet" href="study.css">
+  <script src="topics.js" defer></script>
+  <script src="study.js" defer></script>
+</head>
+<body>
+  <a href="#lesson" class="skip">跳到正文</a>
+  <div class="shell">
+    <header class="nav">
+      <a class="brand" href="../">陈煜</a>
+      <nav aria-label="网站导航">
+        <a href="../#projects">项目</a>
+        <a href="./" aria-current="page">学习与复习</a>
+        <a href="https://github.com/Giveme10minutes">GitHub</a>
+      </nav>
+    </header>
+    <main>
+      <section class="intro" aria-labelledby="title">
+        <div>
+          <h1 id="title">实习面试复习</h1>
+          <p>沿着两个项目的真实流程读代码。每学完一节，试着用自己的话回答一次。</p>
+        </div>
+        <div class="progress-box">
+          <span>能独立讲清</span>
+          <strong id="progress-label"></strong>
+          <progress id="progress-bar" value="0" max="1" aria-label="能独立讲清的知识点"></progress>
+          <a id="resume" hidden>继续上次学习</a>
+        </div>
+      </section>
+      <div class="layout">
+        <aside class="sidebar" aria-label="学习目录">
+          <button id="toggle-directory" class="directory-toggle" aria-controls="directory" aria-expanded="false">展开学习目录</button>
+          <div id="directory">
+            <label for="search">搜索知识点</label>
+            <input id="search" type="search" placeholder="试试 SSE、JWT、Redis">
+            <div class="filters" id="filters" aria-label="目录筛选">
+              <button type="button" data-filter="all" aria-pressed="true">全部</button>
+              <button type="button" data-filter="review" aria-pressed="false">待复习</button>
+              <button type="button" data-filter="saved" aria-pressed="false">收藏</button>
+            </div>
+            <nav id="topics" aria-label="知识点"></nav>
+          </div>
+        </aside>
+        <div class="reading">
+          <div class="reading-tools">
+            <div class="modes" id="modes" aria-label="阅读模式">
+              <button type="button" data-mode="learn" aria-pressed="true">学习</button>
+              <button type="button" data-mode="test" aria-pressed="false">自测</button>
+            </div>
+            <button id="favorite" class="plain-button" type="button" aria-pressed="false">收藏本节</button>
+          </div>
+          <article id="lesson" tabindex="-1"></article>
+          <div id="practice" hidden>
+            <form id="notes">
+              <label for="answer">我的回答</label>
+              <textarea id="answer" rows="3" placeholder="先试着用自己的话回答面试题"></textarea>
+              <label for="note">复习笔记</label>
+              <textarea id="note" rows="3" placeholder="记下要点或容易混淆的地方"></textarea>
+              <label for="question">想进一步问的问题</label>
+              <textarea id="question" rows="2" placeholder="例如，我没理解为什么要分开保存消息和生成回复"></textarea>
+              <div class="practice-actions">
+                <button id="copy" class="primary" type="button">复制问题和上下文</button>
+                <div class="status-select">
+                  <label for="mastery">掌握程度</label>
+                  <select id="mastery">
+                    <option value="">未标记</option>
+                    <option value="new">还不会</option>
+                    <option value="review">需要复习</option>
+                    <option value="known">能独立讲清</option>
+                  </select>
+                </div>
+              </div>
+              <p class="feedback" id="copy-status" role="status"></p>
+              <div id="manual-copy" hidden>
+                <label for="copy-text">选中以下内容并复制</label>
+                <textarea id="copy-text" rows="6" readonly></textarea>
+              </div>
+            </form>
+          </div>
+          <nav id="neighbors" class="neighbors" aria-label="相邻知识点"></nav>
+        </div>
+      </div>
+      <noscript><p>启用 JavaScript 后即可查看知识点和保存复习进度。</p></noscript>
+    </main>
+    <footer class="footer">
+      <div>
+        <strong>学习记录</strong>
+        <p>回答、笔记和进度保存在当前浏览器。导出备份后可在另一设备导入。</p>
+        <p id="storage-status" role="status"></p>
+      </div>
+      <div class="backup">
+        <button id="export" type="button">导出备份</button>
+        <button id="import" type="button">导入备份</button>
+        <input id="backup-file" type="file" accept=".json,application/json" hidden>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>
