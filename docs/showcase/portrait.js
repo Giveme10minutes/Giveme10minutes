@@ -36,8 +36,9 @@ function render() {
   const summary = ease(between(progress, 0.73, 0.88));
   const brightness = clamp(reveal / 0.25);
   const spread = reveal ** 1.72;
-  const cueExit = between(progress, 0, 0.36);
-  const cueScale = 1 + 0.8 * (1 - (1 - cueExit) ** 2);
+  const cueZoom = between(progress, 0, 0.14);
+  const cueFade = ease(between(progress, 0.14, 0.44));
+  const cueScale = 2 - (1 - cueZoom) ** 2;
 
   scene.style.setProperty("--portrait-opacity", brightness);
   scene.style.setProperty("--light-width", `${16 + 162 * spread}%`);
@@ -47,9 +48,9 @@ function render() {
   scene.style.setProperty("--name-opacity", name);
   scene.style.setProperty("--name-offset", `${12 * (1 - name)}px`);
   scene.style.setProperty("--summary-opacity", summary);
-  scene.style.setProperty("--cue-opacity", 1 - ease(cueExit));
+  scene.style.setProperty("--cue-opacity", 1 - cueFade);
   scene.style.setProperty("--cue-scale", cueScale);
-  cue.classList.toggle("is-hidden", cueExit === 1);
+  cue.classList.toggle("is-hidden", cueFade === 1);
   scene.style.setProperty("--intro-scene-opacity", 1 - ease(between(scroll, 1.77, 2.13)));
   renderAward(scroll);
   renderProjects(scroll);
