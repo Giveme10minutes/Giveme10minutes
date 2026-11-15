@@ -51,6 +51,7 @@ function render() {
   scene.style.setProperty("--name-offset", `${12 * (1 - name)}px`);
   scene.style.setProperty("--summary-opacity", summary);
   scene.style.setProperty("--cue-opacity", 1 - cueFade);
+  scene.style.setProperty("--cue-rise", 1 - (1 - cueFade) ** 1.7);
   scene.style.setProperty("--cue-scale", cueScale);
   cue.classList.toggle("is-hidden", cueFade === 1);
   scene.style.setProperty("--intro-scene-opacity", 1 - ease(between(scroll, 1.77, 2.13)));
