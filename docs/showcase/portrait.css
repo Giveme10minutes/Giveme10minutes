@@ -1,0 +1,230 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background: #000;
+  color-scheme: dark;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, "PingFang SC", sans-serif;
+}
+
+.scene {
+  position: relative;
+}
+
+.portrait-frame,
+.award-frame,
+.project-frame {
+  position: relative;
+  height: 100svh;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.portrait-frame {
+  display: grid;
+  place-items: center;
+  --portrait-shift: min(12vw, 240px);
+}
+
+.portrait {
+  width: min(100vw, 80svh, 820px);
+  position: relative;
+  transform: translateX(calc(-1 * var(--portrait-shift)));
+  transform-origin: 49% 35%;
+}
+
+.portrait img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.portrait::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(0deg, #000, transparent 20%, transparent 94%, #000),
+    linear-gradient(90deg, #000, transparent 8%, transparent 90%, #000);
+}
+
+.intro {
+  position: absolute;
+  top: 34%;
+  left: 59%;
+  right: 5%;
+  max-width: 460px;
+}
+
+.intro h1 {
+  margin: 0 0 clamp(22px, 3vh, 36px);
+  color: #f4f0e9;
+  font-size: clamp(56px, 6.8vw, 112px);
+  font-weight: 600;
+  line-height: 1.06;
+  letter-spacing: .055em;
+}
+
+.latin-name {
+  display: block;
+  margin-top: 15px;
+  color: #aaa6a0;
+  font-size: clamp(15px, 1.2vw, 21px);
+  font-weight: 400;
+  letter-spacing: .13em;
+}
+
+.intro-summary {
+  color: #bdbbb7;
+  font-size: clamp(15px, 1.26vw, 22px);
+  line-height: 1.85;
+}
+
+.intro-summary p {
+  margin: 0;
+}
+
+.intro-summary .education {
+  padding-top: 17px;
+  border-top: 1px solid #353331;
+  color: #e7e2da;
+  font-weight: 550;
+}
+
+.intro-summary .bio {
+  margin-top: .75em;
+  text-wrap: pretty;
+}
+
+.intro-summary .interests {
+  margin-top: .85em;
+  color: #e7e2da;
+}
+
+.scroll-cue {
+  display: none;
+  position: absolute;
+  left: 50%;
+  bottom: max(22px, env(safe-area-inset-bottom));
+  transform: translateX(-50%);
+  min-height: 44px;
+  padding: 5px 14px;
+  color: #ccc;
+  text-decoration: none;
+  font-size: .75rem;
+  letter-spacing: .15em;
+  white-space: nowrap;
+}
+
+.scroll-cue:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 4px;
+}
+
+.scroll-line {
+  display: block;
+  width: 1px;
+  height: 20px;
+  margin: 9px auto 0;
+  background: linear-gradient(#ccc, #444);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .scene.is-interactive {
+    min-height: 725svh;
+  }
+
+  .is-interactive .stage {
+    position: sticky;
+    top: 0;
+    height: 100svh;
+    isolation: isolate;
+  }
+
+  .is-interactive .portrait-frame,
+  .is-interactive .award-frame,
+  .is-interactive .project-frame {
+    position: absolute;
+    inset: 0;
+  }
+
+  .is-interactive .portrait-frame {
+    opacity: var(--intro-scene-opacity, 1);
+  }
+
+  .is-interactive #portrait-revealed {
+    position: absolute;
+    top: 155svh;
+  }
+
+  .is-interactive .portrait {
+    transform:
+      translateX(calc(-1 * var(--portrait-shift) * var(--portrait-pan, 0)))
+      scale(var(--portrait-scale, 1));
+  }
+
+  .is-interactive .portrait img {
+    opacity: var(--portrait-opacity, 0);
+    mask-image: radial-gradient(
+      ellipse var(--light-width, 20%) var(--light-height, 12%) at 49% 35%,
+      #000 38%,
+      rgb(0 0 0 / 82%) 56%,
+      transparent 100%
+    );
+  }
+
+  .is-interactive .intro h1 {
+    opacity: var(--name-opacity, 0);
+    transform: translateY(var(--name-offset, 12px));
+  }
+
+  .is-interactive .intro-summary {
+    opacity: var(--summary-opacity, 0);
+  }
+
+  .is-interactive .scroll-cue {
+    display: block;
+    opacity: var(--cue-opacity, 1);
+  }
+
+  .is-interactive .scroll-cue.is-hidden {
+    visibility: hidden;
+  }
+}
+
+.return-home {
+  position: fixed;
+  top: 20px;
+  right: 24px;
+  z-index: 2;
+  padding: 8px 12px;
+  border-radius: 6px;
+  background: #0d0d0deb;
+  color: #d3ccc1;
+  font-size: .8rem;
+  text-underline-offset: .25em;
+}
+
+@media (max-width: 760px) {
+  .return-home { top: 10px; right: 12px; }
+
+  .portrait-frame {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    padding: 36px 24px 44px;
+  }
+
+  .portrait { width: min(100%, 400px); transform: none; }
+  .intro { position: static; width: 100%; }
+  .award-frame { height: max(480px, 80svh); }
+  .robot { left: 50%; top: 40%; }
+  .robot-floor { top: 32%; left: 13%; width: 74%; }
+  .award-copy { top: 48%; left: 24px; right: 24px; }
+}
