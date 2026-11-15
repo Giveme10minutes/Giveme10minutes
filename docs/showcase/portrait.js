@@ -30,7 +30,8 @@ function render() {
   frame = 0;
   const scroll = -scene.getBoundingClientRect().top / stage.offsetHeight;
   const progress = clamp(scroll / 1.76);
-  const reveal = between(progress, 0, 0.42);
+  const rise = between(progress, 0, 0.43);
+  const reveal = between(progress, 0.028, 0.448);
   const pan = ease(between(progress, 0.49, 0.8));
   const name = ease(between(progress, 0.56, 0.77));
   const summary = ease(between(progress, 0.73, 0.88));
@@ -44,7 +45,7 @@ function render() {
   scene.style.setProperty("--light-width", `${16 + 162 * spread}%`);
   scene.style.setProperty("--light-height", `${8 + 174 * spread}%`);
   scene.style.setProperty("--portrait-scale", 1 + 0.035 * reveal);
-  scene.style.setProperty("--portrait-rise", 1 - ease(reveal));
+  scene.style.setProperty("--portrait-rise", (1 - rise) ** 3);
   scene.style.setProperty("--portrait-pan", pan);
   scene.style.setProperty("--name-opacity", name);
   scene.style.setProperty("--name-offset", `${12 * (1 - name)}px`);
