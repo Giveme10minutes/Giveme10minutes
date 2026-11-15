@@ -38,7 +38,7 @@ function render() {
   const spread = reveal ** 1.72;
   const cueZoom = between(progress, 0, 0.14);
   const cueFade = between(progress, 0, 0.40);
-  const cueScale = 2 - (1 - cueZoom) ** 2;
+  const cueScale = 1 + 0.7 * (1 - (1 - cueZoom) ** 2);
 
   scene.style.setProperty("--portrait-opacity", brightness);
   scene.style.setProperty("--light-width", `${16 + 162 * spread}%`);
