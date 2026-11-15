@@ -111,14 +111,15 @@ body {
   display: none;
   position: absolute;
   left: 50%;
-  bottom: max(22px, env(safe-area-inset-bottom));
+  bottom: max(36px, env(safe-area-inset-bottom));
   transform: translateX(-50%);
   min-height: 44px;
   padding: 5px 14px;
-  color: #ccc;
+  color: #f0e8db;
   text-decoration: none;
-  font-size: .75rem;
-  letter-spacing: .15em;
+  font-size: 1.125rem;
+  font-weight: 500;
+  letter-spacing: .1em;
   white-space: nowrap;
 }
 
@@ -127,12 +128,26 @@ body {
   outline-offset: 4px;
 }
 
-.scroll-line {
-  display: block;
-  width: 1px;
-  height: 20px;
-  margin: 9px auto 0;
-  background: linear-gradient(#ccc, #444);
+.scroll-arrow {
+  display: grid;
+  place-items: start center;
+  width: 24px;
+  height: 24px;
+  margin: 12px auto 0;
+}
+
+.scroll-arrow::before {
+  content: "";
+  width: 12px;
+  height: 12px;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: rotate(45deg);
+}
+
+@keyframes scroll-arrow-dip {
+  0%, 68%, 100% { transform: translateY(0); }
+  32% { transform: translateY(6px); }
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -191,6 +206,10 @@ body {
   .is-interactive .scroll-cue {
     display: block;
     opacity: var(--cue-opacity, 1);
+  }
+
+  .is-interactive .scroll-arrow {
+    animation: scroll-arrow-dip 2.4s ease-in-out infinite;
   }
 
   .is-interactive .scroll-cue.is-hidden {
