@@ -182,6 +182,7 @@ body {
   .is-interactive .portrait {
     transform:
       translateX(calc(-1 * var(--portrait-shift) * var(--portrait-pan, 0)))
+      translateY(calc(clamp(60px, 9vh, 105px) * var(--portrait-rise, 1)))
       scale(var(--portrait-scale, 1));
   }
 

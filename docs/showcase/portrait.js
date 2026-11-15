@@ -44,6 +44,7 @@ function render() {
   scene.style.setProperty("--light-width", `${16 + 162 * spread}%`);
   scene.style.setProperty("--light-height", `${8 + 174 * spread}%`);
   scene.style.setProperty("--portrait-scale", 1 + 0.035 * reveal);
+  scene.style.setProperty("--portrait-rise", 1 - ease(reveal));
   scene.style.setProperty("--portrait-pan", pan);
   scene.style.setProperty("--name-opacity", name);
   scene.style.setProperty("--name-offset", `${12 * (1 - name)}px`);
