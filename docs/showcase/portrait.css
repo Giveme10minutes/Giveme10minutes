@@ -112,7 +112,8 @@ body {
   position: absolute;
   left: 50%;
   bottom: max(36px, env(safe-area-inset-bottom));
-  transform: translate(-50%, var(--cue-offset, 0px));
+  transform: translateX(-50%) scale(var(--cue-scale, 1));
+  transform-origin: center bottom;
   min-height: 44px;
   padding: 5px 14px;
   color: #f0e8db;
